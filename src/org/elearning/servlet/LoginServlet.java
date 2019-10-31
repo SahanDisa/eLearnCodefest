@@ -57,7 +57,8 @@ public class LoginServlet extends HttpServlet {
         if (userName == null || password == null || userName.length() == 0 || password.length() == 0) {
             hasError = true;
             errorString = "Required username and password!";
-        } else {
+        }
+        else {
         	
             Connection conn = MyUtils.getStoredConnection(request);
             try {
