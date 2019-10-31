@@ -13,7 +13,117 @@
 <link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
 <link rel="stylesheet" type="text/css" href="styles/main_styles.css">
 <link rel="stylesheet" type="text/css" href="styles/responsive.css">
+<script type="text/javascript">
+	$(function() {
+
+  $(".progress").each(function() {
+
+    var value = $(this).attr('data-value');
+    var left = $(this).find('.progress-left .progress-bar');
+    var right = $(this).find('.progress-right .progress-bar');
+
+    if (value > 0) {
+      if (value <= 50) {
+        right.css('transform', 'rotate(' + percentageToDegrees(value) + 'deg)')
+      } else {
+        right.css('transform', 'rotate(180deg)')
+        left.css('transform', 'rotate(' + percentageToDegrees(value - 50) + 'deg)')
+      }
+    }
+
+  })
+
+  function percentageToDegrees(percentage) {
+
+    return percentage / 100 * 360
+
+  }
+
+});
+</script>
 </head>
+<style>
+	.progress {
+  width: 150px;
+  height: 150px;
+  background: none;
+  position: relative;
+}
+
+.progress::after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 6px solid #eee;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.progress>span {
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+}
+
+.progress .progress-left {
+  left: 0;
+}
+
+.progress .progress-bar {
+  width: 100%;
+  height: 100%;
+  background: none;
+  border-width: 6px;
+  border-style: solid;
+  position: absolute;
+  top: 0;
+}
+
+.progress .progress-left .progress-bar {
+  left: 100%;
+  border-top-right-radius: 80px;
+  border-bottom-right-radius: 80px;
+  border-left: 0;
+  -webkit-transform-origin: center left;
+  transform-origin: center left;
+}
+
+.progress .progress-right {
+  right: 0;
+}
+
+.progress .progress-right .progress-bar {
+  left: -100%;
+  border-top-left-radius: 80px;
+  border-bottom-left-radius: 80px;
+  border-right: 0;
+  -webkit-transform-origin: center right;
+  transform-origin: center right;
+}
+
+.progress .progress-value {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.rounded-lg {
+  border-radius: 1rem;
+}
+
+.text-gray {
+  color: #aaa;
+}
+
+div.h4 {
+  line-height: 1rem;
+}
+
+</style>
 <body>
 
 <div class="super_container">
@@ -103,9 +213,9 @@
 			<div class="row">
 				<div class="col">
 					<div class="section_title_container text-center">
-						<img src="images/logo_athena.png">
+						<!-- <img src="images/logo_athena.png">
 						<h2 class="section_title">Welcome To Athena</h2>
-						<div class="section_subtitle"><p>The online e-learning platform dedicated to learn ....</p></div>
+						<div class="section_subtitle"><p>The online e-learning platform dedicated to learn ....</p></div> -->
 					</div>
 				</div>
 			</div>
@@ -150,286 +260,64 @@
 			</div>
 		</div>
 	</div>
-	<!-- Popular Courses -->
+<!-- Profile Statistics -->
+	<div class="container">
+		<!--  -->
+		<div class="row features_row">
+		<div class="col-xl-3 col-lg-6 mb-4">
+      	<div class="bg-white rounded-lg p-5 shadow">
+        <h2 class="h6 font-weight-bold text-center mb-4">Overall progress</h2>
 
-	<div class="courses">
-		<div class="section_background parallax-window" data-parallax="scroll" data-image-src="images/courses_background.jpg" data-speed="0.8"></div>
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="section_title_container text-center">
-						<h2 class="section_title">Popular Online Courses</h2>
-						<div class="section_subtitle"></div>
-					</div>
-				</div>
-			</div>
-			<div class="row courses_row">
-				
-				<!-- Course -->
-				<div class="col-lg-4 course_col">
-					<div class="course">
-						<div class="course_image"><img src="images/course_4.jpg" alt=""></div>
-						<div class="course_body">
-							<h3 class="course_title"><a href="course.html">Programming</a></h3>
-							<div class="course_text">
-								<p>Learn C programming bascis</p>
-							</div>
-						</div>
-						<div class="course_footer">
-							<div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
-								<div class="course_info">
-									<i class="fa fa-graduation-cap" aria-hidden="true"></i>
-									<span>20,000</span>
-								</div>
-								<div class="course_info">
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<span>4 Ratings</span>
-								</div>
-								<div class="course_price ml-auto">Free</div>
-							</div>
-						</div>
-					</div>
-				</div>
+        <!-- Progress bar 1 -->
+        <div class="progress mx-auto" data-value='80'>
+          <span class="progress-left">
+                        <span class="progress-bar border-primary"></span>
+          </span>
+          <span class="progress-right">
+                        <span class="progress-bar border-primary"></span>
+          </span>
+          <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+            <div class="h2 font-weight-bold">80<sup class="small">%</sup></div>
+          </div>
+        </div>
+    	</div>
+    	</div>
+    	<div class="col-xl-3 col-lg-3 mb-4">
+    		<img src="images/profile.png">
+    		<h1>sahan dissanayaka</h1>
+    	</div>
+    	<div class="col-lg-3 feature_col">
+					<div class="feature text-center trans_400">
+						<div class="feature_icon"><img src="images/book.png" width="75px" alt=""></div>
+						<h3 class="feature_title">My Courses</h3>
+						<div class="feature_text">
+							<ul>
+								<li>C lang</li>
+								<li>C++</li>
+							</ul>
 
-				<!-- Course -->
-				<div class="col-lg-4 course_col">
-					<div class="course">
-						<div class="course_image"><img src="images/course_7.jpg" alt=""></div>
-						<div class="course_body">
-							<h3 class="course_title"><a href="course.html">Algebra</a></h3>
-							<div class="course_text">
-								<p>Learn Algebra</p>
-							</div>
-						</div>
-						<div class="course_footer">
-							<div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
-								<div class="course_info">
-									<i class="fa fa-graduation-cap" aria-hidden="true"></i>
-									<span>50,000</span>
-								</div>
-								<div class="course_info">
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<span>5 Ratings</span>
-								</div>
-								<div class="course_price ml-auto">Free</div>
-							</div>
+
 						</div>
 					</div>
 				</div>
 
-				<!-- Course -->
-				<div class="col-lg-4 course_col">
-					<div class="course">
-						<div class="course_image"><img src="images/course_5.jpg" alt=""></div>
-						<div class="course_body">
-							<h3 class="course_title"><a href="course.html">Python</a></h3>
-							<div class="course_text">
-								<p>Learn python programming</p>
-							</div>
-						</div>
-						<div class="course_footer">
-							<div class="course_footer_content d-flex flex-row align-items-center justify-content-start">
-								<div class="course_info">
-									<i class="fa fa-graduation-cap" aria-hidden="true"></i>
-									<span>45,000</span>
-								</div>
-								<div class="course_info">
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<span>5 Ratings</span>
-								</div>
-								<div class="course_price ml-auto">Free</div>
-							</div>
+				<!-- Features Item -->
+				<div class="col-lg-3 feature_col" onclick="location.href='courses.html';">
+					<div class="feature text-center trans_400">
+						<div class="feature_icon"><img src="images/badge.png"width="60px" alt=""></div>
+						<h3 class="feature_title">My Skills</h3>
+						<div class="feature_text">
+							<ul>
+								<li>Win a challenge</li>
+								<li>Complete a course</li>
+							</ul>
 						</div>
 					</div>
 				</div>
-
-			</div>
-			<div class="row">
-				<div class="col">
-					<div class="courses_button trans_200"><a href="#">view all courses</a></div>
-				</div>
-			</div>
-		</div>
+    	</div>
 	</div>
+	
 
-
-	<!-- Events -->
-
-	<div class="events">
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<div class="section_title_container text-center">
-						<h2 class="section_title">Upcoming events</h2>
-						<div class="section_subtitle"></div>
-					</div>
-				</div>
-			</div>
-			<div class="row events_row">
-
-				<!-- Event -->
-				<div class="col-lg-4 event_col">
-					<div class="event event_left">
-						<div class="event_image"><img src="images/event_1.jpg" alt=""></div>
-						<div class="event_body d-flex flex-row align-items-start justify-content-start">
-							<div class="event_date">
-								<div class="d-flex flex-column align-items-center justify-content-center trans_200">
-									<div class="event_day trans_200">23</div>
-									<div class="event_month trans_200">Dec</div>
-								</div>
-							</div>
-							<div class="event_content">
-								<div class="event_title"><a href="#">C lovers meet-up</a></div>
-								<div class="event_info_container">
-									<div class="event_info"><i class="fa fa-clock-o" aria-hidden="true"></i><span>15.00 - 19.30</span></div>
-									<div class="event_info"><i class="fa fa-map-marker" aria-hidden="true"></i><span>Vihara Maha Devi Park</span></div>
-									<div class="event_text">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Event -->
-				<div class="col-lg-4 event_col">
-					<div class="event event_mid">
-						<div class="event_image"><img src="images/event_2.jpg" alt=""></div>
-						<div class="event_body d-flex flex-row align-items-start justify-content-start">
-							<div class="event_date">
-								<div class="d-flex flex-column align-items-center justify-content-center trans_200">
-									<div class="event_day trans_200">27</div>
-									<div class="event_month trans_200">Jan</div>
-								</div>
-							</div>
-							<div class="event_content">
-								<div class="event_title"><a href="#">You the Cl to my Na...</a></div>
-								<div class="event_info_container">
-									<div class="event_info"><i class="fa fa-clock-o" aria-hidden="true"></i><span>09.00 - 17.30</span></div>
-									<div class="event_info"><i class="fa fa-map-marker" aria-hidden="true"></i><span>Nelum Pokuna</span></div>
-									<div class="event_text">
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Event -->
-				<div class="col-lg-4 event_col">
-					<div class="event event_right">
-						<div class="event_image"><img src="images/event_3.jpg" alt=""></div>
-						<div class="event_body d-flex flex-row align-items-start justify-content-start">
-							<div class="event_date">
-								<div class="d-flex flex-column align-items-center justify-content-center trans_200">
-									<div class="event_day trans_200">01</div>
-									<div class="event_month trans_200">Feb</div>
-								</div>
-							</div>
-							<div class="event_content">
-								<div class="event_title"><a href="#">Pre-Olympiad</a></div>
-								<div class="event_info_container">
-									<div class="event_info"><i class="fa fa-clock-o" aria-hidden="true"></i><span>13.00 - 18.30</span></div>
-									<div class="event_info"><i class="fa fa-map-marker" aria-hidden="true"></i><span>University of Colombo, Main aUditorium</span></div>
-									<div class="event_text">
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-
-
-		<div class="team">
-			<div class="container">
-				<div class="row">
-					<div class="col">
-						<div class="section_title_container text-center">
-							<h2 class="section_title">The Best Moderators in Town</h2>
-							<div class="section_subtitle"></div>
-						</div>
-					</div>
-				</div>
-				<div class="row team_row">
-
-					<!-- Team Item -->
-					<div class="col-lg-3 col-md-6 team_col">
-						<div class="team_item">
-							<div class="team_image"><img src="images/pro.jpg" alt=""></div>
-							<div class="team_body">
-								<div class="team_title"><a href="#">Sahan Dissanayaka</a></div>
-								<div class="team_subtitle"></div>
-								<div class="social_list">
-									<ul>
-										<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-										<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-										<li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Team Item -->
-					<div class="col-lg-3 col-md-6 team_col">
-						<div class="team_item">
-							<div class="team_image"><img src="images/pro.jpg" alt=""></div>
-							<div class="team_body">
-								<div class="team_title"><a href="#">Thenuka Ovin</a></div>
-								<div class="team_subtitle"></div>
-								<div class="social_list">
-									<ul>
-										<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-										<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-										<li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Team Item -->
-					<div class="col-lg-3 col-md-6 team_col">
-						<div class="team_item">
-							<div class="team_image"><img src="images/pro.jpg" alt=""></div>
-							<div class="team_body">
-								<div class="team_title"><a href="#">George Raveen</a></div>
-								<div class="team_subtitle"></div>
-								<div class="social_list">
-									<ul>
-										<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-										<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-										<li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-
-					<!-- Team Item -->
-					<div class="col-lg-3 col-md-6 team_col">
-						<div class="team_item">
-							<div class="team_image"><img src="images/pro2.jpg" alt=""></div>
-							<div class="team_body">
-								<div class="team_title"><a href="#">Malithya Fernando</a></div>
-								<div class="team_subtitle"></div>
-								<div class="social_list">
-									<ul>
-										<li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-										<li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-										<li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-									</ul>
-								</div>
-							</div>
-						</div>
-					</div>
-
-				</div>
-			</div>
-		</div>
 
 	<!-- Footer -->
 
@@ -534,6 +422,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 </div>
 
 <script src="js/jquery-3.2.1.min.js"></script>
+<script src="js/jquery-3.3.1.slim.min.js"></script>
 <script src="styles/bootstrap4/popper.js"></script>
 <script src="styles/bootstrap4/bootstrap.min.js"></script>
 <script src="plugins/greensock/TweenMax.min.js"></script>
