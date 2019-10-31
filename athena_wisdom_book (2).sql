@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 31, 2019 at 08:42 PM
+-- Generation Time: Oct 31, 2019 at 09:15 PM
 -- Server version: 10.3.15-MariaDB
 -- PHP Version: 7.3.6
 
@@ -68,7 +68,8 @@ CREATE TABLE `answer` (
 --
 
 INSERT INTO `answer` (`answer_id`, `content`, `quiz_id`) VALUES
-('an1', '==', 'q6');
+('an1', '==', 'q6'),
+('an2', '3, -1', 'q5');
 
 -- --------------------------------------------------------
 
@@ -108,6 +109,17 @@ CREATE TABLE `create` (
   `course_id` varchar(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `create`
+--
+
+INSERT INTO `create` (`mod_id`, `course_id`) VALUES
+('T001', 'sci1'),
+('T002', 'mat1'),
+('T003', 'pr1'),
+('T004', 'mat2'),
+('T004', 'sci2');
+
 -- --------------------------------------------------------
 
 --
@@ -142,6 +154,14 @@ CREATE TABLE `manage` (
   `mod_id` varchar(4) NOT NULL,
   `question_id` varchar(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `manage`
+--
+
+INSERT INTO `manage` (`mod_id`, `question_id`) VALUES
+('T003', 'qu1'),
+('T004', 'qu2');
 
 -- --------------------------------------------------------
 
@@ -183,7 +203,8 @@ CREATE TABLE `question` (
 --
 
 INSERT INTO `question` (`question_id`, `content`, `explanation`, `quiz_id`, `answer_id`) VALUES
-('qu1', 'Which is the correct operator for equality testing?', 'c programming', 'q6', 'an1');
+('qu1', 'Which is the correct operator for equality testing?', 'c programming', 'q6', 'an1'),
+('qu2', 'x^2 -2x -3', 'binomial functons', 'q5', 'an2');
 
 -- --------------------------------------------------------
 
