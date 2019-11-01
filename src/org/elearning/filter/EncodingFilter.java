@@ -1,5 +1,5 @@
 package org.elearning.filter;
-
+ 
 import java.io.IOException;
 import java.sql.Connection;
 import java.util.Collection;
@@ -9,7 +9,6 @@ import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRegistration;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
