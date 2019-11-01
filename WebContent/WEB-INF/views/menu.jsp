@@ -4,7 +4,7 @@
 
 <div style="padding: 10px;">
  
-   <a href="${pageContext.request.contextPath}/">Home</a>
+   <a href="${pageContext.request.contextPath}/home">Home</a>
    |
    <a href="${pageContext.request.contextPath}/productList">Product List</a>
    |
