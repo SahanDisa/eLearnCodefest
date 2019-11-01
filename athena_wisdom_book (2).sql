@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Oct 31, 2019 at 09:15 PM
--- Server version: 10.3.15-MariaDB
--- PHP Version: 7.3.6
+-- Host: 127.0.0.1:3306
+-- Generation Time: Nov 01, 2019 at 12:20 AM
+-- Server version: 5.7.24
+-- PHP Version: 7.2.14
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -28,14 +28,16 @@ SET time_zone = "+00:00";
 -- Table structure for table `account`
 --
 
-CREATE TABLE `account` (
+DROP TABLE IF EXISTS `account`;
+CREATE TABLE IF NOT EXISTS `account` (
   `username` varchar(40) NOT NULL,
   `password` varchar(40) NOT NULL,
   `email` varchar(50) DEFAULT NULL,
   `level` int(11) DEFAULT NULL,
   `xp` int(11) DEFAULT NULL,
   `fname` varchar(30) DEFAULT NULL,
-  `lname` varchar(40) DEFAULT NULL
+  `lname` varchar(40) DEFAULT NULL,
+  PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -57,10 +59,13 @@ INSERT INTO `account` (`username`, `password`, `email`, `level`, `xp`, `fname`, 
 -- Table structure for table `answer`
 --
 
-CREATE TABLE `answer` (
+DROP TABLE IF EXISTS `answer`;
+CREATE TABLE IF NOT EXISTS `answer` (
   `answer_id` varchar(8) NOT NULL,
   `content` varchar(80) NOT NULL,
-  `quiz_id` varchar(4) NOT NULL
+  `quiz_id` varchar(4) NOT NULL,
+  PRIMARY KEY (`answer_id`),
+  KEY `quiz_id` (`quiz_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -69,7 +74,19 @@ CREATE TABLE `answer` (
 
 INSERT INTO `answer` (`answer_id`, `content`, `quiz_id`) VALUES
 ('an1', '==', 'q6'),
-('an2', '3, -1', 'q5');
+('an10', 'If', 'q10'),
+('an11', 'for', 'q10'),
+('an12', 'while', 'q10'),
+('an13', 'go', 'q10'),
+('an14', 'when', 'q10'),
+('an2', '3, -1', 'q5'),
+('an3', '++', 'q6'),
+('an4', '--', 'q6'),
+('an5', '//', 'q6'),
+('an6', '+-', 'q6'),
+('an7', '=+', 'q6'),
+('an8', '-=', 'q6'),
+('an9', 'Do while', 'q10');
 
 -- --------------------------------------------------------
 
@@ -77,10 +94,12 @@ INSERT INTO `answer` (`answer_id`, `content`, `quiz_id`) VALUES
 -- Table structure for table `course`
 --
 
-CREATE TABLE `course` (
+DROP TABLE IF EXISTS `course`;
+CREATE TABLE IF NOT EXISTS `course` (
   `course_id` varchar(4) NOT NULL,
   `name` varchar(20) NOT NULL,
-  `max_score` int(11) NOT NULL
+  `max_score` int(11) NOT NULL,
+  PRIMARY KEY (`course_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -104,9 +123,12 @@ INSERT INTO `course` (`course_id`, `name`, `max_score`) VALUES
 -- Table structure for table `create`
 --
 
-CREATE TABLE `create` (
+DROP TABLE IF EXISTS `create`;
+CREATE TABLE IF NOT EXISTS `create` (
   `mod_id` varchar(4) NOT NULL,
-  `course_id` varchar(4) NOT NULL
+  `course_id` varchar(4) NOT NULL,
+  PRIMARY KEY (`mod_id`,`course_id`),
+  KEY `course_id` (`course_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -114,10 +136,10 @@ CREATE TABLE `create` (
 --
 
 INSERT INTO `create` (`mod_id`, `course_id`) VALUES
-('T001', 'sci1'),
 ('T002', 'mat1'),
-('T003', 'pr1'),
 ('T004', 'mat2'),
+('T003', 'pr1'),
+('T001', 'sci1'),
 ('T004', 'sci2');
 
 -- --------------------------------------------------------
@@ -126,11 +148,14 @@ INSERT INTO `create` (`mod_id`, `course_id`) VALUES
 -- Table structure for table `has`
 --
 
-CREATE TABLE `has` (
+DROP TABLE IF EXISTS `has`;
+CREATE TABLE IF NOT EXISTS `has` (
   `username` varchar(40) NOT NULL,
   `course_id` varchar(4) NOT NULL,
   `progress` int(11) NOT NULL,
-  `total_score` int(11) NOT NULL
+  `total_score` int(11) NOT NULL,
+  PRIMARY KEY (`username`,`course_id`),
+  KEY `course_id` (`course_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -150,9 +175,12 @@ INSERT INTO `has` (`username`, `course_id`, `progress`, `total_score`) VALUES
 -- Table structure for table `manage`
 --
 
-CREATE TABLE `manage` (
+DROP TABLE IF EXISTS `manage`;
+CREATE TABLE IF NOT EXISTS `manage` (
   `mod_id` varchar(4) NOT NULL,
-  `question_id` varchar(6) NOT NULL
+  `question_id` varchar(6) NOT NULL,
+  PRIMARY KEY (`mod_id`,`question_id`),
+  KEY `question_id` (`question_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -169,9 +197,11 @@ INSERT INTO `manage` (`mod_id`, `question_id`) VALUES
 -- Table structure for table `moderator`
 --
 
-CREATE TABLE `moderator` (
+DROP TABLE IF EXISTS `moderator`;
+CREATE TABLE IF NOT EXISTS `moderator` (
   `mod_id` varchar(4) NOT NULL,
-  `name` varchar(40) NOT NULL
+  `name` varchar(40) NOT NULL,
+  PRIMARY KEY (`mod_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -190,12 +220,16 @@ INSERT INTO `moderator` (`mod_id`, `name`) VALUES
 -- Table structure for table `question`
 --
 
-CREATE TABLE `question` (
+DROP TABLE IF EXISTS `question`;
+CREATE TABLE IF NOT EXISTS `question` (
   `question_id` varchar(6) NOT NULL,
   `content` varchar(80) NOT NULL,
   `explanation` varchar(80) NOT NULL,
   `quiz_id` varchar(4) NOT NULL,
-  `answer_id` varchar(8) NOT NULL
+  `answer_id` varchar(8) NOT NULL,
+  PRIMARY KEY (`question_id`),
+  KEY `quiz_id` (`quiz_id`),
+  KEY `answer_id` (`answer_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -204,7 +238,8 @@ CREATE TABLE `question` (
 
 INSERT INTO `question` (`question_id`, `content`, `explanation`, `quiz_id`, `answer_id`) VALUES
 ('qu1', 'Which is the correct operator for equality testing?', 'c programming', 'q6', 'an1'),
-('qu2', 'x^2 -2x -3', 'binomial functons', 'q5', 'an2');
+('qu2', 'x^2 -2x -3', 'binomial functons', 'q5', 'an2'),
+('qu3', 'Which loop is guaranteed to execute at least one time?', 'do while loop run 1 time and compare', 'q10', 'an9');
 
 -- --------------------------------------------------------
 
@@ -212,11 +247,14 @@ INSERT INTO `question` (`question_id`, `content`, `explanation`, `quiz_id`, `ans
 -- Table structure for table `quiz`
 --
 
-CREATE TABLE `quiz` (
+DROP TABLE IF EXISTS `quiz`;
+CREATE TABLE IF NOT EXISTS `quiz` (
   `course_id` varchar(4) NOT NULL,
   `quiz_id` varchar(4) NOT NULL,
   `name` varchar(50) NOT NULL,
-  `mod_id` varchar(4) NOT NULL
+  `mod_id` varchar(4) NOT NULL,
+  PRIMARY KEY (`quiz_id`),
+  KEY `mod_id` (`mod_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -225,11 +263,12 @@ CREATE TABLE `quiz` (
 
 INSERT INTO `quiz` (`course_id`, `quiz_id`, `name`, `mod_id`) VALUES
 ('mat1', 'q1', 'trigonometry', 'T002'),
+('pr1', 'q10', 'loops', 'T004'),
 ('sci1', 'q2', 'chemistry', 'T001'),
 ('pr2', 'q3', 'python', 'T003'),
 ('sci2', 'q4', 'biology', 'T004'),
 ('mat2', 'q5', 'algebra', 'T004'),
-('pr1', 'q6', 'c', 'T003'),
+('pr1', 'q6', 'c base', 'T003'),
 ('mat3', 'q7', 'geonometry', 'T002'),
 ('sci3', 'q8', 'physics', 'T001'),
 ('mat3', 'q9', 'combinatorics', 'T004');
@@ -240,10 +279,13 @@ INSERT INTO `quiz` (`course_id`, `quiz_id`, `name`, `mod_id`) VALUES
 -- Table structure for table `unit`
 --
 
-CREATE TABLE `unit` (
+DROP TABLE IF EXISTS `unit`;
+CREATE TABLE IF NOT EXISTS `unit` (
   `unit_id` varchar(5) NOT NULL,
   `title` varchar(15) NOT NULL,
-  `course_id` varchar(4) NOT NULL
+  `course_id` varchar(4) NOT NULL,
+  PRIMARY KEY (`unit_id`),
+  KEY `course_id` (`course_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -255,78 +297,6 @@ INSERT INTO `unit` (`unit_id`, `title`, `course_id`) VALUES
 ('u2', 'data types', 'pr2'),
 ('u3', 'binomial functi', 'mat2'),
 ('u4', 'priodic table', 'sci1');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `account`
---
-ALTER TABLE `account`
-  ADD PRIMARY KEY (`username`);
-
---
--- Indexes for table `answer`
---
-ALTER TABLE `answer`
-  ADD PRIMARY KEY (`answer_id`),
-  ADD KEY `quiz_id` (`quiz_id`);
-
---
--- Indexes for table `course`
---
-ALTER TABLE `course`
-  ADD PRIMARY KEY (`course_id`);
-
---
--- Indexes for table `create`
---
-ALTER TABLE `create`
-  ADD PRIMARY KEY (`mod_id`,`course_id`),
-  ADD KEY `course_id` (`course_id`);
-
---
--- Indexes for table `has`
---
-ALTER TABLE `has`
-  ADD PRIMARY KEY (`username`,`course_id`),
-  ADD KEY `course_id` (`course_id`);
-
---
--- Indexes for table `manage`
---
-ALTER TABLE `manage`
-  ADD PRIMARY KEY (`mod_id`,`question_id`),
-  ADD KEY `question_id` (`question_id`);
-
---
--- Indexes for table `moderator`
---
-ALTER TABLE `moderator`
-  ADD PRIMARY KEY (`mod_id`);
-
---
--- Indexes for table `question`
---
-ALTER TABLE `question`
-  ADD PRIMARY KEY (`question_id`),
-  ADD KEY `quiz_id` (`quiz_id`),
-  ADD KEY `answer_id` (`answer_id`);
-
---
--- Indexes for table `quiz`
---
-ALTER TABLE `quiz`
-  ADD PRIMARY KEY (`quiz_id`),
-  ADD KEY `mod_id` (`mod_id`);
-
---
--- Indexes for table `unit`
---
-ALTER TABLE `unit`
-  ADD PRIMARY KEY (`unit_id`),
-  ADD KEY `course_id` (`course_id`);
 
 --
 -- Constraints for dumped tables
