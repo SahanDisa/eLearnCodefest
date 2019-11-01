@@ -126,7 +126,7 @@ body {
         </label>
       </div>
       <button class="btn btn-lg btn-primary btn-block" type="submit" value= "Submit" >Sign in</button>
-      <label>Not a user</label>
+      <label>Not a user</label><a href="${pageContext.request.contextPath}/signup" >Sign Up</a>
       <p class="mt-5 mb-3 text-muted">&copy; 2019-2020</p>
     </form>
   </body>

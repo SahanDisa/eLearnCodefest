@@ -8,11 +8,21 @@ public class UserAccount {
    private String userName;
    private String gender;
    private String password;
+   private String email;
     
  
-   public UserAccount() {
-        
-   }
+   
+	
+	public UserAccount() {
+	        
+	   }
+	public String getEmail() {
+		return email;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
     
    public String getUserName() {
        return userName;
